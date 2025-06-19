@@ -1,4 +1,4 @@
-module github.com/gocarina/gocsv
+module github.com/mnhkahn/gocsv
 
 go 1.13
 
