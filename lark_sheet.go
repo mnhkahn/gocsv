@@ -64,8 +64,6 @@ func LarkSheet(ctx context.Context, appID, appToken, url string, out interface{}
 					}
 				}()
 
-				value := getStringValue(columnContent)
-				println("value is", value, header)
 				if dst.Kind() == reflect.String && dstV.Kind() != reflect.String {
 					// println(tagIndex, header, columnContent, dst.Name())
 					a := getStringValue(columnContent)
