@@ -84,7 +84,7 @@ func LarkSheet(ctx context.Context, appID, appToken, url string, out interface{}
 
 func readSheetsContent(ctx context.Context, appID, appToken, spreadsheetToken string, valueRange string) (*ReadSheetsContent, error) {
 	client := lark.NewClient(appID, appToken)
-	url := fmt.Sprintf("https://open.feishu.cn/open-apis/sheets/v2/spreadsheets/%s/values/%s", spreadsheetToken, valueRange)
+	url := fmt.Sprintf("https://open.larksuite.com/open-apis/sheets/v2/spreadsheets/%s/values/%s", spreadsheetToken, valueRange)
 	resp, err := client.Get(ctx, url, nil, larkcore.AccessTokenTypeTenant)
 	if err != nil {
 		return nil, err

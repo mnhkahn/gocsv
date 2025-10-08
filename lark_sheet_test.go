@@ -7,7 +7,7 @@ import (
 
 func TestLarkSheet(t *testing.T) {
 	res := make([]*a, 0, 1)
-	err := LarkSheet(context.Background(), "cli_a733fba967381003", "amMVjbLCLoFvReAoCEtucfVKbxdlwqdk", "https://fntxar02de.larksuite.com/sheets/HATpsm58GhyuxPt3NVCuEHygs2g?sheet=KKOdcC", &res)
+	err := LarkSheet(context.Background(), "your_app_id", "your_app_token", "https://fntxar02de.sg.larksuite.com/sheets/El7rsO6a3h15WCtiP8SlcxiogYd", &res)
 	if err != nil {
 		t.Error(err.Error())
 	}
