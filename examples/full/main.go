@@ -4,11 +4,10 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"time"
 
-	"github.com/gocarina/gocsv"
+	"github.com/mnhkahn/gocsv"
 )
 
 type NotUsed struct {
@@ -104,7 +103,7 @@ func main() {
 		panic(err)
 	}
 	// Read file and print to console
-	b, err := ioutil.ReadAll(clientsFile)
+	b, err := io.ReadAll(clientsFile)
 	if err != nil {
 		panic(err)
 	}

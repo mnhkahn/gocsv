@@ -264,3 +264,47 @@ func isErrorType(outType reflect.Type) bool {
 
 	return outType.Implements(errorInterface)
 }
+
+func getStringValue(columnContent interface{}) string {
+	if columnContent != nil {
+		// 判断 columnContent 的类型
+		switch v := columnContent.(type) {
+		case map[string]interface{}:
+			return getStringValueFromMap(v)
+		case []interface{}:
+			if len(v) > 0 {
+				return getStringValue(v[0])
+			} else {
+				return ""
+			}
+		case string:
+			return columnContent.(string)
+		default:
+			println(fmt.Sprintf("columnContent 类型为 %T", columnContent))
+			return ""
+		}
+	} else {
+		return ""
+	}
+}
+
+func getStringValueFromMap(columnContent map[string]interface{}) string {
+	// 检查type字段是否存在且类型为string
+	typeValue, typeExists := columnContent["type"]
+	if !typeExists {
+		return ""
+	}
+	typeStr, isString := typeValue.(string)
+	if !isString {
+		return ""
+	}
+
+	// 只有当type为url时才处理link字段
+	if typeStr == "url" {
+		// 检查link字段是否存在
+		if linkValue, linkExists := columnContent["link"]; linkExists {
+			return getStringValue(linkValue)
+		}
+	}
+	return ""
+}

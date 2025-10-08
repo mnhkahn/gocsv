@@ -10,7 +10,6 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/cstockton/go-conv"
 	lark "github.com/larksuite/oapi-sdk-go/v3"
 	larkcore "github.com/larksuite/oapi-sdk-go/v3/core"
 	larksheets "github.com/larksuite/oapi-sdk-go/v3/service/sheets/v3"
@@ -65,13 +64,14 @@ func LarkSheet(ctx context.Context, appID, appToken, url string, out interface{}
 					}
 				}()
 
+				value := getStringValue(columnContent)
+				println("value is", value, header)
 				if dst.Kind() == reflect.String && dstV.Kind() != reflect.String {
-					a, err := conv.String(columnContent)
-					if err != nil {
-						return err
-					}
+					// println(tagIndex, header, columnContent, dst.Name())
+					a := getStringValue(columnContent)
 					field.Set(reflect.ValueOf(a).Convert(dst))
 				} else {
+					// println(tagIndex, header, columnContent, dst.Name(), "not string")
 					field.Set(dstV.Convert(dst))
 				}
 			}
